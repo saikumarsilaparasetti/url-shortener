@@ -10,7 +10,8 @@ router.get('/', async (req, res)=>{
 
 
 router.post('/shortUrls', async (req, res)=>{
-    await shortUrl.create({full: req.body.fullUrl});
+    const newRecord =  await shortUrl.create({full: req.body.fullUrl});
+    if(newRecord ==  null)res.status(501).send('Record not added')
     res.redirect('/')
 })
 
